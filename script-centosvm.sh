@@ -23,7 +23,7 @@ docker network create --driver=bridge REDEOCL
 sudo firewall-cmd --add-port=1521/tcp --permanent
 sudo firewall-cmd --reload
 
-sudo docker run --name oracle -d -p 51521:1521 -e ORACLE_PASSWORD=lasBr01 -e ORACLE_CHARACTERSET=AL32UTF8 -v oracle-volume:/opt/oracle/oradata --network REDEOCL gvenzl/oracle-free
+sudo docker run --name oracle -d -p 51521:1521 -e ORACLE_PASSWORD=password -e ORACLE_CHARACTERSET=AL32UTF8 -v oracle-volume:/opt/oracle/oradata --network REDEOCL gvenzl/oracle-free
 
 # Instala o SDKMAN!
 curl -s "https://get.sdkman.io" | bash
