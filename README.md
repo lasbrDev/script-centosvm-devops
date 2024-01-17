@@ -19,7 +19,7 @@ Certifique-se de ter as permissões corretas para executar scripts **(chmod +x s
 
 * Git, Vim, Curl, Wget
 * Docker
-* Oracle Database
+* Oracle Database - docker image
 * SDKMAN!
 * Oh My Posh com o tema amro
 
