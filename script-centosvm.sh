@@ -40,6 +40,6 @@ oh-my-posh font install DaddyTimeMono
 
 fc-cache -vf
 
-echo 'eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json)"' | sudo tee -a ~/.bashrc
+echo 'eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/amro.omp.json)"' | sudo tee -a ~/.bashrc
 
 exec bash
