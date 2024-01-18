@@ -4,15 +4,15 @@
 
 # Atualiza os pacotes e instalações no sistema
 echo "Executando a instalação e atualização de pacotes..."
-yum update -y && yum install -y
+sudo yum update -y && yum install -y
 
 # Instala ferramentas de desenvolvimento
 echo "Executando a instalação de ferramentas de desenvolvimento..."
-dnf install -y git vim curl wget
+sudo dnf install -y git vim curl wget
 
 # Instala o utilitário yum-config-manager
 echo "Executando a instalação do yum-config-manager..."
-yum install -y yum-utils
+sudo yum install -y yum-utils
 
 # Adiciona o repositório do Docker
 echo "Configurando o repositório do Docker..."
@@ -20,17 +20,17 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 
 # Instala o Docker e componentes adicionais
 echo "Executando a instalação do Docker e componentes adicionais..."
-yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Habilita e inicia o serviço Docker
 echo "Configurando e iniciando o serviço Docker..."
-systemctl enable docker
-systemctl start docker
+sudo systemctl enable docker
+sudo systemctl start docker
 sleep 8
 
 # Adiciona o usuário ao grupo Docker
 echo "Adicionando o usuário ao grupo Docker..."
-usermod -aG docker $USER
+sudo usermod -aG docker $USER
 
 # Cria uma rede Docker chamada REDEOCL
 echo "Configurando a rede Docker..."
@@ -39,8 +39,8 @@ sleep 8
 
 # Configura o firewall para a porta 1521 - Oracle Database
 echo "Configurando o firewall para a porta 1521..."
-firewall-cmd --add-port=1521/tcp --permanent
-firewall-cmd --reload
+sudo firewall-cmd --add-port=1521/tcp --permanent
+sudo firewall-cmd --reload
 
 # Executa uma instância do Oracle Database no Docker
 echo "Executando a instalação do Oracle Database..."
@@ -60,7 +60,7 @@ sdk install java 17.0.9-tem
 
 # Instala o Oh My Posh
 echo "Executando a instalação do Oh My Posh..."
-curl -s https://ohmyposh.dev/install.sh | bash
+curl -s https://ohmyposh.dev/install.sh | sudo bash
 
 # Instala uma fonte para o Oh My Posh
 echo "Instalando uma fonte para o Oh My Posh..."
