@@ -1,15 +1,24 @@
 # CentOS 9 Stream VM Setup Script
 
-Este script automatiza a instalação de pacotes e configurações iniciais em uma máquina virtual CentOS 9 Stream. Ele inclui a instalação do Docker, Oracle Database, SDKMAN! para gerenciamento de SDKs e Oh My Posh para melhorar o prompt do Bash.
+Este script automatiza a instalação de pacotes e configurações iniciais em uma máquina virtual CentOS 9 Stream. Ele inclui a instalação do Docker, Oracle Database via **docker image**, SDKMAN! para gerenciamento de SDKs e Oh My Posh para melhorar o prompt do Bash.
 
 ## Uso
 
-Execute o script com:
+* Baixar o **script** [aqui](httts://github.com/lasbrDev/script-centosvm-devops)
+* Descompactar o arquivo .zip
+* Acessar o arquivo descompactado pelo terminal:
 
 ```bash
-./setup_script.sh
+cd Downloads
+ls
+cd script-centosvm-devops-main
+ls
+sudo su
+Password:
+chmod +x script-centosvm-devops.sh
+./script-centosvm-devops.sh
 ```
-Certifique-se de ter as permissões corretas para executar scripts **(chmod +x setup_script.sh)** antes de executar.
+![centosvm-terminal.png](img/centosvm-terminal.png)
 
 ## Pré-requisitos
 * Máquina virtual CentOS 9 Stream
