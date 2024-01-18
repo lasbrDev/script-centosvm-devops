@@ -78,5 +78,14 @@ echo 'eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/Ja
 exec bash
 sleep 8
 
+# Instala o Neofetch
+echo "Executando a instalação do Neofetch..."
+sudo dnf clean all
+sleep 5
+sudo dnf -y install epel-release
+sudo dnf update
+sudo dnf -y install neofetch
+
+
 # Finaliza o script
 exit
