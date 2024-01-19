@@ -14,6 +14,17 @@ sudo dnf install -y git
 echo "Executando a instalação do yum-config-manager..."
 sudo yum install -y yum-utils
 
+# Instala o Neofetch
+echo "Executando a instalação do Neofetch..."
+sudo dnf clean all
+sudo dnf -y install epel-release
+sudo dnf update
+sudo dnf -y install neofetch
+
+# Instala o Neovim
+echo "Executando a instalação do Neovim..."
+sudo yum install -y neovim python3-neovim
+
 # Adiciona o repositório do Docker
 echo "Configurando o repositório do Docker..."
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -77,19 +88,6 @@ echo 'eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/Ja
 # Reinicia o shell para aplicar as alterações
 exec bash
 sleep 8
-
-# Instala o Neofetch
-echo "Executando a instalação do Neofetch..."
-sudo dnf clean all
-sleep 5
-sudo dnf -y install epel-release
-sudo dnf update
-sudo dnf -y install neofetch
-
-# Instala o Neovim
-echo "Executando a instalação do Neovim..."
-sudo yum install -y neovim python3-neovim
-
 
 # Finaliza o script
 exit

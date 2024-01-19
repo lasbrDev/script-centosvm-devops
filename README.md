@@ -26,7 +26,7 @@ chmod +x script-centosvm-devops.sh
 
 ## Componentes Instalados
 
-* Git, Vim, Curl, Wget
+* Git, Neofetch, Neovim
 * Docker
 * Oracle Database - docker image
 * SDKMAN!
