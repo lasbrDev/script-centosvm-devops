@@ -8,7 +8,7 @@ sudo yum update -y && yum install -y
 
 # Instala ferramentas de desenvolvimento
 echo "Executando a instalação de ferramentas de desenvolvimento..."
-sudo dnf install -y git vim curl wget
+sudo dnf install -y git
 
 # Instala o utilitário yum-config-manager
 echo "Executando a instalação do yum-config-manager..."
@@ -71,7 +71,7 @@ echo "Atualizando o cache de fontes..."
 fc-cache -vf
 
 # Adiciona a configuração do Oh My Posh ao final do arquivo .bashrc
-echo 'Configurando o Oh My Posh no .bashrc...'
+echo "Configurando o Oh My Posh no .bashrc..."
 echo 'eval "$(oh-my-posh init bash --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/amro.omp.json)"' | tee -a ~/.bashrc
 
 # Reinicia o shell para aplicar as alterações
@@ -85,6 +85,10 @@ sleep 5
 sudo dnf -y install epel-release
 sudo dnf update
 sudo dnf -y install neofetch
+
+# Instala o Neovim
+echo "Executando a instalação do Neovim..."
+sudo yum install -y neovim python3-neovim
 
 
 # Finaliza o script
