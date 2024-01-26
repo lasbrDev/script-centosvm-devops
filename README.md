@@ -29,6 +29,8 @@ chmod +x script-centosvm-devops.sh
 * Git, Neofetch, Neovim
 * Docker
 * Oracle Database - docker image
+* MongoDB - docker image
+* MySQL - docker image
 * SDKMAN!
 * Oh My Posh com o tema amro
 

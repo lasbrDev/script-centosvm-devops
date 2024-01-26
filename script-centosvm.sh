@@ -57,6 +57,27 @@ sudo firewall-cmd --reload
 echo "Executando a instalação do Oracle Database..."
 docker run --name oracle -d -p 51521:1521 -e ORACLE_PASSWORD=password -e ORACLE_CHARACTERSET=AL32UTF8 -v oracle-volume:/opt/oracle/oradata --network REDEOCL gvenzl/oracle-free
 
+# Cria uma rede Docker chamada REDEMSQL
+echo "Configurando a rede Docker MySQL..."
+docker network create REDEMSQL
+
+# Cria uma instância do MySQL no Docker
+echo "Criando um volume Docker para armazenar os dados do MySQL..."
+docker run --name my-mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=systemjsf -v mysql-database:/var/lib/mysql --network REDEMSQL -d mysql:latest
+
+# Cria uma rede Docker chamada REDEMONGO
+echo "Configurando a rede Docker MongoDB..."
+docker network create REDEMONGO
+
+# Cria um diretório para armaenar os dados do MongoDB
+echo "Criando um diretório para armazenar os dados do MongoDB..."
+mkdir -p /data/db
+
+# Executa uma instância do MongoDB no Docker
+echo "Executando a instalação do MongoDB ..."
+docker run -d --name mongo-express --network REDEMONGO -v /data/db:/data/db -e ME_CONFIG_MONGODB_SERVER=mongodb -e ME_CONFIG_BASICAUTH_USERNAME=user -e ME_CONFIG_BASICAUTH_PASSWORD=password -e MONGO_INITDB_DATABASE=mongo-social -e ME_CONFIG_MONGODB_ENABLE_ADMIN='false' -p 27017:27017 mongo-express:latest
+
+
 # Instala o SDKMAN!
 echo "Executando a instalação do SDKMAN!..."
 curl -s "https://get.sdkman.io" | bash
