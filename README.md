@@ -36,7 +36,10 @@ chmod +x script-centosvm-devops.sh
 
 ## Configurações Adicionais
 
-O script também cria uma rede Docker chamada REDEOCL e configura a porta 1521 no firewall.
+Atenção para o acesso ao MongoExpress em localhost. Ao acessar o endereço http://localhost:8081, é necessário fornecer as credenciais. Username: admin, Password: pass.
+Adicionalmente, incluí um arquivo docker-compose.yml para configurar o MongoDB, proporcionando maior flexibilidade aos projetos. Lembre-se de ajustar as configurações conforme necessário.
+
+![mongo-express.png](img/mongo-express.png)
 
 ## Notas
 

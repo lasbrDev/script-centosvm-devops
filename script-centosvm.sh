@@ -69,13 +69,21 @@ docker run --name my-mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQ
 echo "Configurando a rede Docker MongoDB..."
 docker network create REDEMONGO
 
-# Cria um diretório para armaenar os dados do MongoDB
-echo "Criando um diretório para armazenar os dados do MongoDB..."
-mkdir -p /data/db
-
 # Executa uma instância do MongoDB no Docker
 echo "Executando a instalação do MongoDB ..."
-docker run -d --name mongo-express --network REDEMONGO -v /data/db:/data/db -e ME_CONFIG_MONGODB_SERVER=mongodb -e ME_CONFIG_BASICAUTH_USERNAME=user -e ME_CONFIG_BASICAUTH_PASSWORD=password -e MONGO_INITDB_DATABASE=mongo-social -e ME_CONFIG_MONGODB_ENABLE_ADMIN='false' -p 27017:27017 mongo-express:latest
+docker run -d --name mongo-dev --network REDEMONGO -v $(pwd)/db_data:/data/db \
+-e MONGO_INITDB_ROOT_USERNAME=root \
+-e MONGO_INITDB_ROOT_PASSWORD=password \
+mongo:latest
+
+# Executa uma instância do Mongo Express no Docker
+echo "Executando a instalação do Mongo Express ..."
+docker run -d --name mongo_ui --network REDEMONGO -p 8081:8081 \
+-e ME_CONFIG_MONGODB_ADMINUSERNAME=root \
+-e ME_CONFIG_MONGODB_ADMINPASSWORD=password \
+-e ME_CONFIG_MONGODB_URL=mongodb://root:password@mongo-dev:27017/ \
+mongo-express:latest
+
 
 
 # Instala o SDKMAN!
