@@ -44,48 +44,35 @@ Adicionalmente, incluí um arquivo docker-compose.yml para configurar o MongoDB,
 ### Permitindo conexões externas
 
 ```bash
-echo '# mongod.conf
-
-# for documentation of all options, see:
-#   http://docs.mongodb.org/manual/reference/configuration-options/
-
-# Where and how to store data.
-storage:
-  dbPath: /var/lib/mongodb
-#  engine:
-#  wiredTiger:
-
-# where to write logging data.
-systemLog:
-  destination: file
-  logAppend: true
-  path: /var/log/mongodb/mongod.log
-
+docker exec -it mongo_dev bash
+```
+```bash
+apt updade && apt upgrade -y
+```
+```bash
+apt-get install neovim -y
+```
+```bash
+nvim /etc/mongod.conf.orig
+```
+`Nota1:` alterar a linha:
+```bash
+# network interfaces
+net:
+  port: 27017
+  bindIp: 127.0.0.1
+```
+Para:
+```bash
 # network interfaces
 net:
   port: 27017
   bindIp: 0.0.0.0
-
-# how the process runs
-processManagement:
-  timeZoneInfo: /usr/share/zoneinfo
-
-#security:
-
-#operationProfiling:
-
-#replication:
-
-#sharding:
-
-## Enterprise-Only Options:
-
-#auditLog:' > /etc/mongod.conf.orig
 ```
 
 ![mongo-express.png](img/mongo-express.png)
 
-## Notas
+## Atenção
 
 * Certifique-se de revisar e ajustar as configurações do script de acordo com suas necessidades.
 * O script foi testado no ambiente CentOS 9 Stream, pode precisar de ajustes em outros ambientes.

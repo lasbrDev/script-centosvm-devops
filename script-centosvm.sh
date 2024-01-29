@@ -75,8 +75,8 @@ docker run -d --name mongo_dev --network REDEMONGO -v $(pwd)/db_data:/data/db \
 -e MONGO_INITDB_ROOT_USERNAME=root \
 -e MONGO_INITDB_ROOT_PASSWORD=password \
 --label com.docker.volume.name=mongo_dev \
--p <ip_virutal_machine>:27017:27017 \
-mongo:latest
+-p 27017:27017 \
+mongo:latest --blind_ip_all
 
 
 # Executa uma instância do Mongo Express no Docker
