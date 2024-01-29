@@ -39,6 +39,50 @@ chmod +x script-centosvm-devops.sh
 Atenção para o acesso ao MongoExpress em localhost. Ao acessar o endereço http://localhost:8081, é necessário fornecer as credenciais. Username: admin, Password: pass.
 Adicionalmente, incluí um arquivo docker-compose.yml para configurar o MongoDB, proporcionando maior flexibilidade aos projetos. Lembre-se de ajustar as configurações conforme necessário.
 
+`Nota:` Este procedimento é aplicável apenas nos casos em que você está iniciando a imagem do MongoDB sem especificar o parâmetro do endereço IP da máquina virtual.
+
+### Permitindo conexões externas
+
+```bash
+echo '# mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# Where and how to store data.
+storage:
+  dbPath: /var/lib/mongodb
+#  engine:
+#  wiredTiger:
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+# how the process runs
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+#security:
+
+#operationProfiling:
+
+#replication:
+
+#sharding:
+
+## Enterprise-Only Options:
+
+#auditLog:' > /etc/mongod.conf.orig
+```
+
 ![mongo-express.png](img/mongo-express.png)
 
 ## Notas

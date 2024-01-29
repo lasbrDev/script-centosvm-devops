@@ -71,19 +71,22 @@ docker network create REDEMONGO
 
 # Executa uma instância do MongoDB no Docker
 echo "Executando a instalação do MongoDB ..."
-docker run -d --name mongo-dev --network REDEMONGO -v $(pwd)/db_data:/data/db \
+docker run -d --name mongo_dev --network REDEMONGO -v $(pwd)/db_data:/data/db \
 -e MONGO_INITDB_ROOT_USERNAME=root \
 -e MONGO_INITDB_ROOT_PASSWORD=password \
+--label com.docker.volume.name=mongo_dev \
+-p <ip_virutal_machine>:27017:27017 \
 mongo:latest
+
 
 # Executa uma instância do Mongo Express no Docker
 echo "Executando a instalação do Mongo Express ..."
 docker run -d --name mongo_ui --network REDEMONGO -p 8081:8081 \
 -e ME_CONFIG_MONGODB_ADMINUSERNAME=root \
 -e ME_CONFIG_MONGODB_ADMINPASSWORD=password \
--e ME_CONFIG_MONGODB_URL=mongodb://root:password@mongo-dev:27017/ \
+-e ME_CONFIG_MONGODB_URL=mongodb://root:password@mongo_dev:27017/ \
+--label com.docker.volume.name=mongo_ui \
 mongo-express:latest
-
 
 
 # Instala o SDKMAN!
