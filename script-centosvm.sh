@@ -53,9 +53,20 @@ echo "Configurando o firewall para a porta 1521..."
 sudo firewall-cmd --add-port=1521/tcp --permanent
 sudo firewall-cmd --reload
 
+# Cria uma rede Docker chamada REDEORCL
+echo "Configurando a rede Docker Oracle Database..."
+docker network create REDEOCL
+
 # Executa uma instância do Oracle Database no Docker
 echo "Executando a instalação do Oracle Database..."
-docker run --name oracle -d -p 51521:1521 -e ORACLE_PASSWORD=password -e ORACLE_CHARACTERSET=AL32UTF8 -v oracle-volume:/opt/oracle/oradata --network REDEOCL gvenzl/oracle-free
+docker run -d \
+    --name oracledb_dev \
+    -p 51521:1521 \
+    -e ORACLE_PASSWORD=password \
+    -e ORACLE_CHARACTERSET=AL32UTF8 \
+    -v oracle-volume:/opt/oracle/oradata \
+    --network REDEORCL \
+    gvenzl/oracle-free
 
 # Cria uma rede Docker chamada REDEMSQL
 echo "Configurando a rede Docker MySQL..."
@@ -63,7 +74,14 @@ docker network create REDEMSQL
 
 # Cria uma instância do MySQL no Docker
 echo "Criando um volume Docker para armazenar os dados do MySQL..."
-docker run --name my-mysql -p 33306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=systemjsf -v mysql-database:/var/lib/mysql --network REDEMSQL -d mysql:latest
+docker run -d \
+    --name mysql_dev \
+    -p 33306:3306 \
+    -e MYSQL_ROOT_PASSWORD=password \
+    -v mysql-database:/var/lib/mysql \
+    --network REDEMSQL \
+    mysql:latest
+
 
 # Cria uma rede Docker chamada REDEMONGO
 echo "Configurando a rede Docker MongoDB..."
@@ -72,11 +90,11 @@ docker network create REDEMONGO
 # Executa uma instância do MongoDB no Docker
 echo "Executando a instalação do MongoDB ..."
 docker run -d --name mongo_dev --network REDEMONGO -v $(pwd)/db_data:/data/db \
--e MONGO_INITDB_ROOT_USERNAME=root \
--e MONGO_INITDB_ROOT_PASSWORD=password \
---label com.docker.volume.name=mongo_dev \
--p 27017:27017 \
-mongo:latest --blind_ip_all
+    -e MONGO_INITDB_ROOT_USERNAME=root \
+    -e MONGO_INITDB_ROOT_PASSWORD=password \
+    --label com.docker.volume.name=mongo_dev \
+    -p 27017:27017 \
+    mongo:latest --blind_ip_all
 
 
 # Executa uma instância do Mongo Express no Docker
@@ -88,6 +106,31 @@ docker run -d --name mongo_ui --network REDEMONGO -p 8081:8081 \
 --label com.docker.volume.name=mongo_ui \
 mongo-express:latest
 
+# Cria uma rede Docker chamada REDEPGSQL
+echo "Configurando a rede Docker PostgreSQL..."
+docker network create REDEPGSQL
+
+# Executa uma instância do PostgreSQL no Docker
+echo "Executando a instalação do PostgreSQL..."
+docker run -d \
+    --name postgre_dev \
+    -e POSTGRES_USER=postgres \
+    -e POSTGRES_PASSWORD=postgress \
+    -p 5432:5432 \
+    --network REDEPOSTGRE \
+    -v postgres_data:/var/lib/postgresql/data \
+    postgres:latest
+
+# Executa uma instância do pgAdmin no Docker
+echo "Executando a instalação do pgAdmin..."
+docker run -d \
+    --name pgadmin_ui \
+    -e PGADMIN_DEFAULT_EMAIL=admin@example.com \
+    -e PGADMIN_DEFAULT_PASSWORD=admin \
+    -p 5050:80 \
+    --network REDEYES \
+    --link postgre_dev:postgres \
+    dpage/pgadmin4:latest
 
 # Instala o SDKMAN!
 echo "Executando a instalação do SDKMAN!..."

@@ -31,6 +31,8 @@ chmod +x script-centosvm-devops.sh
 * Oracle Database - docker image
 * MongoDB - docker image
 * MySQL - docker image
+* PostgreSQL - docker image
+* PGAdmin - docker image
 * SDKMAN!
 * Oh My Posh com o tema amro
 
