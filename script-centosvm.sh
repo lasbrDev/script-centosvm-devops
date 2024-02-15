@@ -117,7 +117,7 @@ docker run -d \
     -e POSTGRES_USER=postgres \
     -e POSTGRES_PASSWORD=postgress \
     -p 5432:5432 \
-    --network REDEPOSTGRE \
+    --network REDEPGSQL \
     -v postgres_data:/var/lib/postgresql/data \
     postgres:latest
 
@@ -128,7 +128,7 @@ docker run -d \
     -e PGADMIN_DEFAULT_EMAIL=admin@example.com \
     -e PGADMIN_DEFAULT_PASSWORD=admin \
     -p 5050:80 \
-    --network REDEYES \
+    --network REDEPGSQL \
     --link postgre_dev:postgres \
     dpage/pgadmin4:latest
 
