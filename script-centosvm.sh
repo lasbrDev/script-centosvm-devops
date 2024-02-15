@@ -55,7 +55,7 @@ sudo firewall-cmd --reload
 
 # Cria uma rede Docker chamada REDEORCL
 echo "Configurando a rede Docker Oracle Database..."
-docker network create REDEOCL
+docker network create REDEORCL
 
 # Executa uma instância do Oracle Database no Docker
 echo "Executando a instalação do Oracle Database..."
