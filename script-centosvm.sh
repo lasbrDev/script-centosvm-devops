@@ -132,6 +132,13 @@ docker run -d \
     --link postgre_dev:postgres \
     dpage/pgadmin4:latest
 
+# Executa uma instância do Tomcat no Docker
+echo "Executando a instalação do Tomcat na porta 8085..."
+docker run -d \
+    --name tomcat_dev \
+    -p 8085:8080 \
+    tomcat:latest
+
 # Instala o SDKMAN!
 echo "Executando a instalação do SDKMAN!..."
 curl -s "https://get.sdkman.io" | bash
