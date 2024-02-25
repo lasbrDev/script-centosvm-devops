@@ -43,11 +43,6 @@ sleep 8
 echo "Adicionando o usuário ao grupo Docker..."
 sudo usermod -aG docker $USER
 
-# Cria uma rede Docker chamada REDEOCL
-echo "Configurando a rede Docker..."
-docker network create --driver=bridge REDEOCL
-sleep 8
-
 # Configura o firewall para a porta 1521 - Oracle Database
 echo "Configurando o firewall para a porta 1521..."
 sudo firewall-cmd --add-port=1521/tcp --permanent
@@ -100,11 +95,11 @@ docker run -d --name mongo_dev --network REDEMONGO -v $(pwd)/db_data:/data/db \
 # Executa uma instância do Mongo Express no Docker
 echo "Executando a instalação do Mongo Express ..."
 docker run -d --name mongo_ui --network REDEMONGO -p 8081:8081 \
--e ME_CONFIG_MONGODB_ADMINUSERNAME=root \
--e ME_CONFIG_MONGODB_ADMINPASSWORD=password \
--e ME_CONFIG_MONGODB_URL=mongodb://root:password@mongo_dev:27017/ \
---label com.docker.volume.name=mongo_ui \
-mongo-express:latest
+    -e ME_CONFIG_MONGODB_ADMINUSERNAME=root \
+    -e ME_CONFIG_MONGODB_ADMINPASSWORD=password \
+    -e ME_CONFIG_MONGODB_URL=mongodb://root:password@mongo_dev:27017/ \
+    --label com.docker.volume.name=mongo_ui \
+    mongo-express:latest
 
 # Cria uma rede Docker chamada REDEPGSQL
 echo "Configurando a rede Docker PostgreSQL..."
