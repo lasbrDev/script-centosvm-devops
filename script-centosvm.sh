@@ -144,7 +144,24 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Instala uma versão específica do JDK usando o SDKMAN!
 echo "Instalando uma versão específica do JDK usando o SDKMAN!..."
-sdk install java 17.0.9-tem
+sdk install java 17.0.10-tem
+
+# Instala uma instância do Jenkins no Docker
+echo "Executando a instalação do Jenkins..."
+docker run --name meu_jenkins \
+    -p 8080:8080 -p 50000:50000 \
+    --restart=on-failure \
+    -v jenkins_home:/var/jenkins_home \
+    jenkins/jenkins:lts-jdk17
+
+# Executa uma instância do Wildfly no Docker
+echo "Executando a instalação do Wildfly..."
+docker run -d --name wildfly_dev \
+    -p 8081:8080 -p 9991:9990 \
+    -e WILDFLY_USERNAME=admin \
+    -e WILDFLY_PASSWORD=password \
+    -v wildfly-deployments:/opt/bitnami/wildfly/standalone/deployments \
+    bitnami/wildfly:latest
 
 # Instala o Oh My Posh
 echo "Executando a instalação do Oh My Posh..."
