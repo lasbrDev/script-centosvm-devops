@@ -30,6 +30,9 @@ chmod +x script-centosvm-devops.sh
 * Docker
 * Oracle Database - docker image
 * MongoDB - docker image
+* Tomcat - docker image
+* Wildfly - docker image
+* Jenkins - docker image
 * MySQL - docker image
 * PostgreSQL - docker image
 * PGAdmin - docker image
