@@ -197,6 +197,15 @@ run_docker_containers() {
         -e WILDFLY_PASSWORD=password \
         -v wildfly-deployments:/opt/bitnami/wildfly/standalone/deployments \
         bitnami/wildfly:latest
+    
+    # MailDev
+    echo "Running MailDev container..."
+    docker run -d --name maildev_dev \
+        -p 1080:1080 \
+        -p 1025:1025 \
+        -e MAILDEV_WEB_USER=developer\
+        -e MAILDEV_WEB_PASS=password \
+        maildev/maildev:latest
 }
 
 main() {
