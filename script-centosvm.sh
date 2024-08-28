@@ -206,6 +206,21 @@ run_docker_containers() {
         -e MAILDEV_WEB_USER=developer\
         -e MAILDEV_WEB_PASS=password \
         maildev/maildev:latest
+
+    # PegaSystems
+    echo "Running PegaSystems container..."
+    docker run -d --name pega_dev \
+    -p 8082:8080 \
+    -e PEGA_ADMIN_PASSWORD=password \
+    -e PEGA_DATABASE_PASSWORD=password \
+    -e PEGA_DATABASE_URL=jdbc:postgresql://postgre_dev:5432/pega \
+    -e PEGA_DATABASE_USERNAME=postgres \
+    -e PEGA_RULES_SCHEMA=pega_rules \
+    -e PEGA_DATA_SCHEMA=pega_data \
+    -e PEGA_SEARCH_SCHEMA=pega_search \
+    -e PEGA_BLOB_SCHEMA=pega_blob \
+    pegasystems/pega:latest
+
 }
 
 main() {
